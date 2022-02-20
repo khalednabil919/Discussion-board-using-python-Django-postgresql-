@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+  {%block title%}Boards{%endblock%}
+  {%block breadcrumb%}
+  <li class="breadcrumb-item active">Boards</li>
+  {%endblock%}
+  {%block content%}
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Board</th>
+                <th>Post</th>
+                <th>Topic</th>
+                <th>Last Post</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for board in BOARDS%}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'board_topics' board.id 0 %}">{{board}}</a>
+                    <small class="text-muted d-block">{{board.description}}</small>
+                </td>
+                <td>{{board.post_count}}</td>
+                <td>{{board.topics.count}}</td>
+                <td>
+                    {%with post=board.last_dt%}
+                    {% if post%}
+                    by {{post.created_by.username}} at
+                    {{post.created_dt}}
+                    {%else%}
+                    <small>there isn't post</small>
+                    {%endif%}
+                    {%endwith%}
+                </td>
+            </tr>
+            {%endfor%}
+
+        </tbody>
+    </table>
+{%endblock%}

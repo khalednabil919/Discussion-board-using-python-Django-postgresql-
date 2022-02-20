@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+    {%block title%}Edit post{%endblock%}
+
+          {%block breadcrumb%}
+            <li class="breadcrumb-item"><a href="{% url 'index'%}">Boards</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'board_topics' post.topic.board.pk 0%}">{{post.topic.board.name}}</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'topic_posts' post.topic.board.pk post.topic.pk%}">{{post.topic.subject}}</a></li>
+            <li class="breadcrumb-item active">Edit</li>
+
+            {%endblock%}
+    {%block content%}
+    <form method="post" novalidate>
+
+      {%include 'includes/form.html'%}
+      <button type="submit" class="btn btn-primary">save changes</button>
+
+    </form>
+
+    {%endblock%}
